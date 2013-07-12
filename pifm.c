@@ -3,6 +3,7 @@
 // Access from ARM Running Linux
 
 
+#define _BSD_SOURCE
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -184,7 +185,7 @@ void playWav(char* filename, float samplerate)
         float sample = datanew + (dataold-datanew) / (1-fmconstant);  // fir of 1 + s tau
         float dval = sample*15.0;  // actual transmitted sample.  15 is bandwidth (about 75 kHz)
         
-        int intval = (int)(round(dval));  // integer component
+        int intval = (int)(dval);  // integer component
         float frac = (dval - (float)intval)/2 + 0.5;
         unsigned int fracval = frac*clocksPerSample;
          
